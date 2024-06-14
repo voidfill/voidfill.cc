@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const pathname = Astro.url.pathname;
+---
+
+<Layout title="404 - Not Found" nav={false}>
+	<div>
+		<h1>404 - Not Found</h1>
+		<h2>{pathname}</h2>
+	</div>
+</Layout>

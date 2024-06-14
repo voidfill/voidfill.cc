@@ -1,5 +1,5 @@
 {
-  "name": "voidfill-cc",
+  "name": "voidfill.cc",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,8 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.10.2",
     "@astrojs/check": "^0.7.0",
+    "@astrojs/node": "^8.3.0",
+    "@astrojs/solid-js": "^4.3.0",
+    "@octokit/types": "^13.5.0",
+    "astro": "^4.10.2",
+    "lightningcss": "^1.25.1",
+    "octokit": "^4.0.2",
+    "solid-js": "^1.8.17",
     "typescript": "^5.4.5"
   }
 }
