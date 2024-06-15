@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-LightItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-Italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-MediumItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-SemiBoldItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-BoldItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillSlab-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/zilla/ZillaSlab-Bold.woff2) format('woff2');
+}

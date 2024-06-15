@@ -7,13 +7,14 @@ export const GET: APIRoute = async () => {
 	try {
 		const repositories = await octokit.rest.repos.listForAuthenticatedUser({
 			sort: "updated",
-			visibility: "public",
+			type: "owner",
 			per_page: 20,
 		});
 
 		return new Response(JSON.stringify(repositories.data), {
 			headers: {
 				"content-type": "application/json",
+				"Cache-Control": "public, max-age=86400",
 			},
 		});
 	} catch (error) {

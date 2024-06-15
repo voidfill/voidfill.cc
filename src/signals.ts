@@ -1,6 +1,8 @@
 import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
 
 export const [theme, setTheme] = createSignal<"light" | "dark" | "auto">(localStorage.getItem('theme') as any || 'auto');
+window.getTheme = theme;
+window.setTheme = setTheme;
 
 const b = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
 const [browserTheme, setBrowserTheme] = createSignal<"light" | "dark">(b.matches ? 'light' : 'dark');

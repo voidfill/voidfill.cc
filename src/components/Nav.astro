@@ -1,11 +1,19 @@
 ---
+import Theme from "./Theme.astro";
+
 const path = Astro.url.pathname;
 const page = "/" + path.split("/")[1];
 
 const paths: {
 	href: string;
 	item: any;
-}[] = [{ href: "/meow", item: "About" }];
+}[] = [
+	{ href: "/about", item: "About" },
+	{
+		href: "/projects",
+		item: "Projects",
+	},
+];
 ---
 
 <div class="nav">
@@ -27,6 +35,9 @@ const paths: {
 			))
 		}
 	</div>
+	<div class="right">
+		<Theme />
+	</div>
 </div>
 
 <style>
@@ -38,7 +49,7 @@ const paths: {
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: 100%;
+		width: calc(100% - 40px);
 		backdrop-filter: blur(10px);
 		height: 60px;
 		display: flex;
@@ -56,22 +67,42 @@ const paths: {
 	}
 
 	.pagelink {
+		all: unset;
 		cursor: pointer;
+		padding: 4px;
+		border-radius: 4px;
+		border: 1px solid rgb(from var(--accent-primary) r g b / 0%);
+		color: rgb(from var(--accent-primary) r g b / 70%);
+		transition:
+			border-color 0.2s,
+			color 0.2s;
+	}
+
+	.pagelink:hover,
+	.pagelink:focus {
+		border-color: rgb(from var(--accent-primary) r g b / 20%);
+		color: rgb(from var(--accent-primary) r g b / 85%);
+	}
+
+	.pagelink.active {
+		border-color: rgb(from var(--accent-primary) r g b / 40%);
+		color: rgb(from var(--accent-primary) r g b / 100%);
 	}
 
 	.logo-wrapper {
 		background-color: var(--accent-primary);
 		color: var(--background-primary);
 	}
+
 	.logo {
 		color: inherit;
 		font-size: 1.5em;
 		font-weight: bold;
-		padding: 2px 4px;
 		color: inherit;
 		font-family: "Zilla Slab";
 		font-weight: 600;
 		font-style: normal;
 		cursor: pointer;
+		padding: 2px 4px;
 	}
 </style>

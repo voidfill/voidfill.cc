@@ -1,0 +1,80 @@
+---
+import { FiSun, FiMoon, FiChevronDown } from "solid-icons/fi";
+import { TbDeviceLaptop } from "solid-icons/tb";
+---
+
+<theme-selector class="theme-selector">
+	<svg class="icons" width="16px" height="16px">
+		<FiSun size="16px" class="light" style={{ display: "none" }} />
+		<FiMoon size="16px" class="dark" style={{ display: "none" }} />
+		<TbDeviceLaptop size="16px" class="auto" style={{ display: "block" }} />
+	</svg>
+	<select value="auto" aria-label="Dark or Lightmode">
+		<option value="light">Light</option>
+		<option value="dark">Dark</option>
+		<option value="auto">Auto</option>
+	</select>
+	<FiChevronDown size="16px" class="chevron" />
+</theme-selector>
+
+<script>
+	class ThemeSelector extends HTMLElement {
+		constructor() {
+			super();
+
+			const s = this.querySelector("select");
+			const i = this.querySelector(".icons");
+			if (!s || !i) throw new Error("Select/Icons not found");
+
+			const idx = {
+				light: 0,
+				dark: 1,
+				auto: 2,
+			};
+
+			i.children[idx["auto"]]?.setAttribute("style", "display: none");
+			(s as HTMLSelectElement).value = window.getTheme();
+			i.children[idx[window.getTheme()]]?.setAttribute("style", "display: block");
+
+			s.addEventListener("change", (e) => {
+				const value = (e.target as HTMLSelectElement).value as "light" | "dark" | "auto";
+				i.children[idx[window.getTheme()]]?.setAttribute("style", "display: none");
+				window.setTheme(value as any);
+				i.children[idx[value]]?.setAttribute("style", "display: block");
+			});
+		}
+	}
+
+	customElements.define("theme-selector", ThemeSelector);
+</script>
+
+<style>
+	select {
+		appearance: none;
+		font-size: 14px;
+		border-radius: 4px;
+		padding: 8px 26px;
+		color: var(--accent-primary);
+		background-color: var(--background-primary);
+	}
+
+	.icons {
+		margin-right: -22px;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.chevron {
+		margin-left: -22px;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.theme-selector {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 85px;
+	}
+</style>

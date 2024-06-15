@@ -36,4 +36,7 @@ export default defineFlatConfig([
 			"@typescript-eslint/no-explicit-any": "off",
 		},
 	},
+	{
+		ignores: ["dist/*"],
+	}
 ]);

@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 const pathname = Astro.url.pathname;
 ---
 
-<Layout title="404 - Not Found" nav={false}>
+<Layout title="404 - Not Found" nav={true} description="404">
 	<div>
 		<h1>404 - Not Found</h1>
 		<h2>{pathname}</h2>
