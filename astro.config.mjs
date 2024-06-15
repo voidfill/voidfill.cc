@@ -7,7 +7,7 @@ import node from "@astrojs/node";
 
 export default defineConfig({
 	integrations: [solidJs()],
-	output: "server",
+	output: "hybrid",
 	build: {
 		inlineStylesheets: "always",
 	},

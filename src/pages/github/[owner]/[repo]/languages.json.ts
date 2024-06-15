@@ -2,6 +2,8 @@ import octokit from "../../../../octokit";
 import type { APIRoute } from "astro";
 import type { Endpoints } from "@octokit/types";
 
+export const prerender = false;
+
 export type ret = Endpoints["GET /repos/{owner}/{repo}/languages"]["response"]["data"];
 export const GET: APIRoute = async (req) => {
 	try {

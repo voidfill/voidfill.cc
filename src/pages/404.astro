@@ -1,13 +1,15 @@
 ---
+export const prerender = false;
 import Layout from "../layouts/Layout.astro";
 
 const pathname = Astro.url.pathname;
 ---
 
-<Layout title="404 - Not Found" nav={true} description="404">
+<Layout title="404 - Not Found" description="404">
 	<div>
 		<h1>404 - Not Found</h1>
 		<h2>{pathname}</h2>
+		<a href="/">Go Home</a>
 	</div>
 </Layout>
 
@@ -17,5 +19,13 @@ const pathname = Astro.url.pathname;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	a {
+		all: unset;
+		cursor: pointer;
+		border: 1px solid rgb(from var(--accent-primary) r g b / 0.3);
+		padding: 8px;
+		border-radius: 4px;
 	}
 </style>

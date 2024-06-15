@@ -19,6 +19,7 @@ const { title, description, nav = true } = Astro.props;
 		{description && <meta name="description" content={description} />}
 		<meta name="viewport" content="width=device-width" />
 		<title>{title}</title>
+		<link rel="icon" href="https://avatars.githubusercontent.com/u/71205200?size=64" type="image/png" />
 		<link href="/fonts/zilla/zillaslab.css" rel="stylesheet" />
 		<link href="/fonts/inter/inter.css" rel="stylesheet" />
 		<ViewTransitions />
@@ -29,7 +30,9 @@ const { title, description, nav = true } = Astro.props;
 				{nav && <Nav />}
 				<div class="content">
 					{nav && <div class="spacer" />}
-					<slot />
+					<div>
+						<slot />
+					</div>
 				</div>
 			</div>
 		</div>
