@@ -48,14 +48,15 @@ const { title, description, nav = true } = Astro.props;
 			const touchDevice = !!(navigator.maxTouchPoints || "ontouchstart" in document.documentElement);
 
 			let lastX = 0,
-				lastY = 0;
-			function MouseIn(body: HTMLElement = document.body) {
-				body.style.setProperty("--mouse-mult", "100%");
-				body.style.setProperty("--mouse-width", "40vw");
+				lastY = 0,
+				currentBody = document.body;
+			function MouseIn() {
+				currentBody.style.setProperty("--mouse-mult", "100%");
+				currentBody.style.setProperty("--mouse-width", "40");
 			}
-			function MouseOut(body: HTMLElement = document.body) {
-				body.style.setProperty("--mouse-mult", "0%");
-				body.style.setProperty("--mouse-width", "100vw");
+			function MouseOut() {
+				currentBody.style.setProperty("--mouse-mult", "0%");
+				currentBody.style.setProperty("--mouse-width", "100");
 			}
 
 			document.addEventListener("astro:before-swap", (e) => {
@@ -63,12 +64,13 @@ const { title, description, nav = true } = Astro.props;
 				body.classList.add("no-transition");
 				body.style.setProperty("--mouse-x", lastX + "px");
 				body.style.setProperty("--mouse-y", lastY + "px");
-				if (!touchDevice) MouseIn(body);
+				currentBody = body;
+				MouseIn();
 
 				setTimeout(() => {
-					body.style.setProperty("--mouse-x", lastX + "px");
-					body.style.setProperty("--mouse-y", lastY + "px");
-					body.classList.remove("no-transition");
+					currentBody.style.setProperty("--mouse-x", lastX + "px");
+					currentBody.style.setProperty("--mouse-y", lastY + "px");
+					currentBody.classList.remove("no-transition");
 				}, 300);
 			});
 
@@ -77,15 +79,16 @@ const { title, description, nav = true } = Astro.props;
 			}, 300);
 
 			if (!touchDevice) {
-				document.addEventListener("mouseout", () => {
+				document.addEventListener("mouseout", (e) => {
+					if (e.relatedTarget !== null) return; // Ignore if the mouse is still in the window
 					MouseOut();
 				});
 
 				document.addEventListener("mousemove", (e) => {
 					lastX = e.clientX;
 					lastY = e.clientY;
-					document.body.style.setProperty("--mouse-x", e.clientX + "px");
-					document.body.style.setProperty("--mouse-y", e.clientY + "px");
+					currentBody.style.setProperty("--mouse-x", e.clientX + "px");
+					currentBody.style.setProperty("--mouse-y", e.clientY + "px");
 					MouseIn();
 				});
 

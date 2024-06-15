@@ -29,8 +29,8 @@
 }
 
 @property --mouse-width {
-	syntax: "<length>";
-	initial-value: 100vw;
+	syntax: "<number>";
+	initial-value: 100;
 	inherits: true;
 }
 
@@ -106,8 +106,8 @@ body::after {
 	left: var(--mouse-x);
 	transform: translate(-50%, -50%);
 	border-radius: 50%;
-	width: var(--mouse-width);
-	height: var(--mouse-width);
+	width: calc(var(--mouse-width) * max(1vw, 1vh));
+	height: calc(var(--mouse-width) * max(1vw, 1vh));
 	background: radial-gradient(circle, rgb(from var(--accent-primary) r g b / 100%) 0%, rgb(from var(--accent-primary) r g b / 15%) 40%, rgb(from var(--accent-primary) r g b / 0%) 100%);
 	z-index: -1;
 	opacity: var(--mouse-mult);
