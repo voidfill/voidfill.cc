@@ -1,0 +1,56 @@
+@property --background-primary {
+	syntax: "<color>";
+	initial-value: #09090b;
+	inherits: true;
+}
+
+@property --accent-primary {
+	syntax: "<color>";
+	initial-value: #fafafa;
+	inherits: true;
+}
+
+body[data-theme="dark"] {
+	--background-primary: #09090b;
+	--accent-primary: #fafafa;
+}
+
+body[data-theme="light"] {
+	--background-primary: #fafafa;
+	--accent-primary: #09090b;
+}
+
+body {
+	background-color: var(--accent-primary);
+	transition-property: --accent-primary, --background-primary;
+	transition-duration: 2s;
+	transition-timing-function: ease-in-out;
+	color: var(--accent-primary);
+	accent-color: var(--accent-primary);
+	
+	user-select: none;
+
+	font-family: "Inter", sans-serif;
+	font-style: normal;
+	overflow-y: scroll;
+
+	&.no-transition {
+		transition: none;
+	}
+
+	> div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		min-height: calc(100% - 60px);
+		display: flex;
+		flex-direction: column;
+		
+		background: radial-gradient(circle at center, transparent 1px, var(--background-primary) 1px);
+		background-size: 60px 60px;
+		background-repeat: repeat;
+		padding-top: 60px;
+		align-items: center;
+	}
+}

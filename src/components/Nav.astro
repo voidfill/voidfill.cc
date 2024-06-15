@@ -1,15 +1,77 @@
 ---
 const path = Astro.url.pathname;
+const page = "/" + path.split("/")[1];
+
+const paths: {
+	href: string;
+	item: any;
+}[] = [{ href: "/meow", item: "About" }];
 ---
-<div>
-	<a href="/">Home</a>
-	<a href="/about">About</a>
+
+<div class="nav">
+	<div class="left">
+		<div class="logo-wrapper">
+			<a href="/" class:list={{ active: page === "/", logo: true }}>voidf:<span style="font-weight: 1000">//</span></a>
+		</div>
+		{
+			paths.map(({ href, item }) => (
+				<a
+					href={href}
+					class:list={{
+						active: href === page,
+						pagelink: true,
+					}}
+				>
+					{item}
+				</a>
+			))
+		}
+	</div>
 </div>
 
-
 <style>
-	div {
+	a {
+		all: unset;
+	}
+
+	.nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		backdrop-filter: blur(10px);
+		height: 60px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid rgb(from var(--accent-primary) r g b / 10%);
+		padding: 0 20px;
+	}
+
+	.left {
 		display: flex;
 		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.pagelink {
+		cursor: pointer;
+	}
+
+	.logo-wrapper {
+		background-color: var(--accent-primary);
+		color: var(--background-primary);
+	}
+	.logo {
+		color: inherit;
+		font-size: 1.5em;
+		font-weight: bold;
+		padding: 2px 4px;
+		color: inherit;
+		font-family: "Zilla Slab";
+		font-weight: 600;
+		font-style: normal;
+		cursor: pointer;
 	}
 </style>

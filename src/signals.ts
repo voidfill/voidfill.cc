@@ -23,4 +23,3 @@ createRoot(() => {
 		e.newDocument.body.dataset.theme = actualTheme();
 	});
 });
-

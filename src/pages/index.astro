@@ -1,17 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const d = new Date();
 ---
 
 <Layout title="voidfill" description="funny description">
-	<div>
-		nyaaa
-		{d.toISOString()}
-	</div>
+	{Array.from({ length: 100 }).map((_, i) => <div>{i * 8888888888888888}</div>)}
 </Layout>
 
-<style>
-	div {
-		background-color: red;
-	}
-</style>
+<style></style>
