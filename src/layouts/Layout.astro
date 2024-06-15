@@ -24,7 +24,11 @@ const { title, description, nav = true } = Astro.props;
 		<link href="/fonts/inter/inter.css" rel="stylesheet" />
 		<ViewTransitions />
 	</head>
-	<body data-theme={"dark"} class="no-transition">
+	<body
+		data-theme={"dark"}
+		class="no-transition"
+		style={{ "--mouse-x": "0px", "--mouse-y": "0px", "--mouse-mult": "0%", "--mouse-width": "100vw" }}
+	>
 		<div class="root">
 			<div class="background">
 				{nav && <Nav />}
@@ -33,7 +37,7 @@ const { title, description, nav = true } = Astro.props;
 					<div>
 						<slot />
 					</div>
-					<div class="spacer" />
+					<div class="spacer"></div>
 				</div>
 			</div>
 		</div>
@@ -41,12 +45,52 @@ const { title, description, nav = true } = Astro.props;
 			import "../signals";
 		</script>
 		<script>
+			const touchDevice = !!(navigator.maxTouchPoints || "ontouchstart" in document.documentElement);
+
+			let lastX = 0,
+				lastY = 0;
+			function MouseIn(body: HTMLElement = document.body) {
+				body.style.setProperty("--mouse-mult", "100%");
+				body.style.setProperty("--mouse-width", "40vw");
+			}
+			function MouseOut(body: HTMLElement = document.body) {
+				body.style.setProperty("--mouse-mult", "0%");
+				body.style.setProperty("--mouse-width", "100vw");
+			}
+
 			document.addEventListener("astro:before-swap", (e) => {
 				const body = e.newDocument.body;
 				body.classList.add("no-transition");
-				setTimeout(() => body.classList.remove("no-transition"), 300);
+				body.style.setProperty("--mouse-x", lastX + "px");
+				body.style.setProperty("--mouse-y", lastY + "px");
+				if (!touchDevice) MouseIn(body);
+
+				setTimeout(() => {
+					body.style.setProperty("--mouse-x", lastX + "px");
+					body.style.setProperty("--mouse-y", lastY + "px");
+					body.classList.remove("no-transition");
+				}, 300);
 			});
-			setTimeout(() => document.body.classList.remove("no-transition"), 300);
+
+			setTimeout(() => {
+				document.body.classList.remove("no-transition");
+			}, 300);
+
+			if (!touchDevice) {
+				document.addEventListener("mouseout", () => {
+					MouseOut();
+				});
+
+				document.addEventListener("mousemove", (e) => {
+					lastX = e.clientX;
+					lastY = e.clientY;
+					document.body.style.setProperty("--mouse-x", e.clientX + "px");
+					document.body.style.setProperty("--mouse-y", e.clientY + "px");
+					MouseIn();
+				});
+
+				if (document.hasFocus()) MouseIn();
+			}
 		</script>
 	</body>
 </html>
