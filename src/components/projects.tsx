@@ -6,6 +6,7 @@ import type { ret as repoRet } from "../pages/github/repositories.json";
 import type { ret as langRet } from "../pages/github/[owner]/[repo]/languages.json";
 
 import "./projects.scss";
+import Tooltip from "./tooltip";
 
 const languageColors = await fetch("/lang-colors.json").then((r) => r.json());
 
@@ -26,13 +27,15 @@ function Languages(props: { fullname: string }): JSX.Element {
 					return (
 						<For each={sorted()}>
 							{([lang, size]) => (
-								<div
-									class="language"
-									style={{
-										width: `${(size / total()) * 100}%`,
-										"background-color": languageColors[lang] ?? "#fff",
-									}}
-								/>
+								<Tooltip text={lang}>
+									<div
+										class="language"
+										style={{
+											width: `${(size / total()) * 100}%`,
+											"background-color": languageColors[lang] ?? "#fff",
+										}}
+									/>
+								</Tooltip>
 							)}
 						</For>
 					);

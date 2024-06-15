@@ -1,0 +1,27 @@
+.tooltip-container:hover .tooltip {
+	display: block;
+}
+
+
+.tooltip {
+	position: absolute;
+	display: none;
+	pointer-events: none;
+	user-select: none;
+	left: 50%;
+	padding: 2px;
+	border-radius: 4px;
+	transform: translateX(-50%) translateY(calc(-100% - 10px));
+	background-color: var(--accent-primary);
+	color: var(--background-primary);
+}
+
+.tooltip::after {
+	content: '';
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	border: 10px solid transparent;
+	border-top-color: var(--accent-primary);
+	transform: translateX(-50%);
+}
