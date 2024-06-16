@@ -12,13 +12,13 @@
 
 @property --mouse-x {
 	syntax: "<length>";
-	initial-value: 0px;
+	initial-value: -10000px;
 	inherits: true;
 }
 
 @property --mouse-y {
 	syntax: "<length>";
-	initial-value: 0px;
+	initial-value: -10000px;
 	inherits: true;
 }
 
