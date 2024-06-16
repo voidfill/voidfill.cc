@@ -2,9 +2,7 @@
 import { defineFlatConfig } from "eslint-define-config";
 // @ts-expect-error
 import { FlatCompat } from "@eslint/eslintrc";
-// @ts-expect-error
 import path from "path";
-// @ts-expect-error
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);

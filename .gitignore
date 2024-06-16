@@ -1,6 +1,10 @@
 # build output
 dist/
 
+# shield sri hashes
+src/generated/*
+!src/generated/.gitkeep
+
 # generated types
 .astro/
 
