@@ -1,0 +1,17 @@
+---
+import "../css/tooltip.css";
+
+interface Props {
+	text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<tool-tip text={text}>
+	<slot />
+</tool-tip>
+
+<script>
+	import "../web/tooltip";
+</script>

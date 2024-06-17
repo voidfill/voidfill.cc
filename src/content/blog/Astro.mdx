@@ -1,0 +1,37 @@
+---
+title: "I love Astro!"
+description: "And why you should too"
+date: "2024-06-17"
+---
+export const prerender = false;
+import Theme from "../../components/astro/Theme.astro";
+
+This article is mostly a dummy entry for testing.
+
+# MDX
+
+Astro is great for hosting mostly static sites. It's fast, and it's easy to use. I love it!
+It also allows you to use MDX, which is a great way to write content.
+It allows you to write JSX in your markdown files, which is great for embedding components.
+
+Heres a simple example:
+
+```tsx
+import Theme from "../../components/astro/Theme.astro";
+
+<Theme />
+```
+Renders to:
+<Theme />
+The Theme component is a simple webcomponent using signals attached to the window.
+[Web components made in astro](https://docs.astro.build/en/guides/client-side-scripts/#web-components-with-custom-elements) benefit from easy to set-up interactivity and being statically renderable.
+Theyre also a great tool to keep bundle sizes small.
+
+## SSR and SSG
+
+Astro allows you to render both server-side and statically. This is great for SEO and performance.
+For example, i can set 
+`
+export const prerender = false;
+`
+to render this page on the server at requesttime ({new Date().toLocaleString()}) or set it to true to render it statically at build time.

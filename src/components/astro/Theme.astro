@@ -32,9 +32,12 @@ import { TbDeviceLaptop } from "solid-icons/tb";
 				auto: 2,
 			};
 
-			i.children[idx["auto"]]?.setAttribute("style", "display: none");
-			(s as HTMLSelectElement).value = window.getTheme();
-			i.children[idx[window.getTheme()]]?.setAttribute("style", "display: block");
+			// wait for signals to be registered since we cannot control the order of the scripts
+			requestAnimationFrame(() => {
+				i.children[idx["auto"]]?.setAttribute("style", "display: none");
+				(s as HTMLSelectElement).value = window.getTheme();
+				i.children[idx[window.getTheme()]]?.setAttribute("style", "display: block");
+			});
 
 			s.addEventListener("change", (e) => {
 				const value = (e.target as HTMLSelectElement).value as "light" | "dark" | "auto";

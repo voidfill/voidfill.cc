@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+---
+
+<Layout title="Blog">
+	<div class="blog-posts">
+		{
+			posts.map((post) => (
+				<a href={`/blog/${post.slug}`}>
+					<div class="card">
+						<h2>{post.data.title}</h2>
+						{post.data.description && <p>{post.data.description}</p>}
+					</div>
+				</a>
+			))
+		}
+	</div>
+</Layout>
+
+<style>
+	.blog-posts {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		max-width: min(calc(100vw - 16px), 600px);
+		min-width: min(calc(100vw - 16px), 600px);
+	}
+
+	h2 {
+		align-self: center;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+</style>

@@ -1,0 +1,39 @@
+---
+interface Props {
+	size?: string;
+	ref?: boolean;
+}
+
+const { size = "1.5em", ref = true } = Astro.props;
+---
+
+<a class="logo" href="/">
+	voidf:<span>//</span>
+</a>
+
+<style define:vars={{ s: size }}>
+	.logo {
+		all: unset;
+		background-color: var(--accent-primary);
+		color: var(--background-primary);
+		font-size: var(--s);
+		font-family: "Zilla Slab", serif;
+		font-weight: 600;
+		font-style: normal;
+		cursor: pointer;
+		text-decoration: none;
+		padding: 0 calc(var(--s) / 9);
+		user-select: none;
+		white-space: normal;
+	}
+
+	.logo > span {
+		font-weight: 800;
+	}
+</style>
+
+{!ref && <style>
+	.logo {
+		pointer-events: none;
+		}
+</style>}

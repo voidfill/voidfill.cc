@@ -1,12 +1,11 @@
 import type { JSX } from "astro/jsx-runtime";
 import { ErrorBoundary, For, Show, Suspense, createMemo, createResource } from "solid-js";
 import { OcRepoforked2, OcStar2 } from "solid-icons/oc";
-
-import type { ret as repoRet } from "../pages/github/repositories.json";
-import type { ret as langRet } from "../pages/github/[owner]/[repo]/languages.json";
-
-import "./projects.scss";
 import Tooltip from "./tooltip";
+import type { ret as repoRet } from "../../pages/github/repositories.json";
+import type { ret as langRet } from "../../pages/github/[owner]/[repo]/languages.json";
+
+import "../css/projects.css";
 
 const languageColors = await fetch("/lang-colors.json").then((r) => r.json());
 
@@ -47,7 +46,7 @@ function Languages(props: { fullname: string }): JSX.Element {
 
 function RepositoryCard(props: repoRet[number]): JSX.Element {
 	return (
-		<a class="repository-card" href={props.html_url}>
+		<a class="repository-card card" href={props.html_url}>
 			<div class="info">
 				<div class="header">
 					<h2>{props.name}</h2>

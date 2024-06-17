@@ -1,0 +1,28 @@
+tool-tip {
+	display: contents;
+}
+
+.tooltip {
+	position: fixed;
+	background-color: var(--accent-primary);
+	color: var(--background-primary);
+	transform: translate(-50%, calc(-100% - 8px));
+	z-index: 1;
+	padding: 4px;
+	border-radius: 4px;
+	pointer-events: none;
+	
+}
+
+.tooltip::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 6px solid var(--accent-primary);
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	top: calc(100% - 1px);
+	left: 50%;
+	transform: translateX(-50%);
+}

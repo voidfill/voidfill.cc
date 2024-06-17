@@ -1,0 +1,43 @@
+.repository-card {
+	display: flex;
+	flex-direction: column;
+	min-width: 0px;
+	flex-grow: 1;
+	flex-shrink: 1;
+	color: unset;
+	text-decoration: none;
+}
+
+.repository-card>.info {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.repository-card .header {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.repositories {
+	display: grid;
+	gap: 16px;
+	max-width: min(900px, 100vw);
+	grid-template-columns: repeat(auto-fill, minmax(min(420px, calc(100vw - 32px)), 1fr));
+}
+
+.repositories .fallback {
+	display: flex;
+	justify-content: center;
+}
+
+.languages {
+	display: flex;
+	flex-direction: row;
+	height: 8px;
+}
+
+.languages .language {
+	white-space: nowrap;
+}

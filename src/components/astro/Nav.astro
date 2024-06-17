@@ -1,4 +1,5 @@
 ---
+import Logo from "./Logo.astro";
 import Theme from "./Theme.astro";
 
 const path = Astro.url.pathname;
@@ -13,14 +14,16 @@ const paths: {
 		href: "/projects",
 		item: "Projects",
 	},
+	{
+		href: "/blog",
+		item: "Blog",
+	},
 ];
 ---
 
 <div class="nav">
 	<div class="left">
-		<div class="logo-wrapper">
-			<a href="/" class:list={{ active: page === "/", logo: true }}>voidf:<span style="font-weight: 1000">//</span></a>
-		</div>
+		<Logo />
 		{
 			paths.map(({ href, item }) => (
 				<a
@@ -57,13 +60,28 @@ const paths: {
 		align-items: center;
 		border-bottom: 1px solid rgb(from var(--accent-primary) r g b / 10%);
 		padding: 0 20px;
+		z-index: 1;
+		gap: 10px;
 	}
 
 	.left {
 		display: flex;
 		flex-direction: row;
+		flex-shrink: 1;
 		align-items: center;
+		overflow: hidden;
+		overflow-x: scroll;
 		gap: 10px;
+	}
+
+	.left::-webkit-scrollbar {
+		display: none;
+	}
+
+	.right {
+		display: flex;
+		flex-direction: row;
+		flex-shrink: 0;
 	}
 
 	.pagelink {
@@ -87,22 +105,5 @@ const paths: {
 	.pagelink.active {
 		border-color: rgb(from var(--accent-primary) r g b / 40%);
 		color: rgb(from var(--accent-primary) r g b / 100%);
-	}
-
-	.logo-wrapper {
-		background-color: var(--accent-primary);
-		color: var(--background-primary);
-	}
-
-	.logo {
-		color: inherit;
-		font-size: 1.5em;
-		font-weight: bold;
-		color: inherit;
-		font-family: "Zilla Slab";
-		font-weight: 600;
-		font-style: normal;
-		cursor: pointer;
-		padding: 2px 4px;
 	}
 </style>

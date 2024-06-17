@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Nav from "../components/Nav.astro";
+import Nav from "../components/astro/Nav.astro";
 import "./layout.css";
 
 interface Props {
@@ -19,21 +19,21 @@ const { title, description, nav = true } = Astro.props;
 		{description && <meta name="description" content={description} />}
 		<meta name="viewport" content="width=device-width" />
 		<title>{title}</title>
+
 		<link rel="icon" href="https://avatars.githubusercontent.com/u/71205200?size=64" type="image/png" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 
-		<link rel="preload" href="/fonts/zilla/ZillaSlab-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-		<link rel="preload" href="/fonts/zilla/ZillaSlab-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
-		<link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
+		<link href="/fonts/zilla/zillaslab.css" rel="stylesheet preload" as="style" />
+		<link href="/fonts/inter/inter.css" rel="stylesheet preload" as="style" />
+		<link rel="preload" href="/fonts/zilla/ZillaSlab-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/zilla/ZillaSlab-Bold.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
 
-		<link href="/fonts/zilla/zillaslab.css" rel="stylesheet" />
-		<link href="/fonts/inter/inter.css" rel="stylesheet" />
 		<ViewTransitions />
+
+		<slot name="head" />
 	</head>
-	<body
-		data-theme={"dark"}
-		class="no-transition"
-	>
+	<body data-theme={"dark"} class="no-transition">
 		<div class="root">
 			<div class="background">
 				{nav && <Nav />}
@@ -48,8 +48,7 @@ const { title, description, nav = true } = Astro.props;
 		</div>
 		<script>
 			import "../signals";
-		</script>
-		<script>
+
 			const touchDevice = !!(navigator.maxTouchPoints || "ontouchstart" in document.documentElement);
 
 			let lastX = 0,

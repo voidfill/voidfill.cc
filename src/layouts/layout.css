@@ -59,9 +59,13 @@ body {
 	overflow: hidden;
 }
 
+body.no-transition {
+	transition: none;
+}
+
 .root {
 	background-color: rgb(from var(--accent-primary) r g b / 15%);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -119,4 +123,11 @@ body::after {
 
 body.no-transition::after {
 	transition: none;
+}
+
+.card {
+	border: 1px solid rgb(from var(--accent-primary) r g b / 20%);
+	border-radius: 8px;
+	padding: 8px;
+	background-color: var(--background-primary);
 }
