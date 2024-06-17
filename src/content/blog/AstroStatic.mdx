@@ -1,9 +1,9 @@
 ---
-title: "I love Astro! (dynamic)"
+title: "I love Astro! (static)"
 description: "And why you should too"
 date: "2024-06-17"
-ssr: true
 ---
+export const prerender = false;
 import Theme from "../../components/astro/Theme.astro";
 
 This article is mostly a dummy entry for testing.
@@ -30,5 +30,4 @@ Theyre also a great tool to keep bundle sizes small.
 ## SSR and SSG
 
 Astro allows you to render both server-side and statically. This is great for SEO and performance.
-This is the dynamically rendered version of the post.
-At the top left of this post is a timestamp, refreshing the page will update it.
+This is the statically rendered version of the post.

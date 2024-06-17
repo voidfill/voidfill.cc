@@ -1,0 +1,19 @@
+---
+import { getEntry } from "astro:content";
+import Blogpost from "../../components/astro/Blogpost.astro";
+
+export const prerender = false;
+
+const s = Astro.params.slug1;
+if (!s) {
+	return new Response("Not Found", { status: 404 });
+}
+
+const entry = await getEntry("blog", s);
+
+if (!entry) {
+	return new Response("Not Found", { status: 404 });
+}
+---
+
+{entry && <Blogpost entry={entry} />}

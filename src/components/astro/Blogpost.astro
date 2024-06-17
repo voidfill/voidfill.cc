@@ -1,17 +1,12 @@
 ---
-import { getCollection } from "astro:content";
+import type { ContentEntryMap } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { h } from "../../components/solid/headerlink";
 import Logo from "../../components/astro/Logo.astro";
 
-export async function getStaticPaths() {
-	const posts = await getCollection("blog");
-	return posts.map((e) => ({
-		params: {
-			slug: e.slug,
-		},
-		props: { entry: e },
-	}));
+type t = ContentEntryMap["blog"];
+interface Props {
+	entry: t[keyof t];
 }
 
 const { entry } = Astro.props;
@@ -25,6 +20,7 @@ const { Content } = await entry.render();
 			<h1>{entry.data.title}</h1>
 			{entry.data.description && <h2>{entry.data.description}</h2>}
 		</div>
+		<span class="debug-info">Mode: {entry.data.ssr ? "SSR" : "SSG"} at {new Date().toLocaleString()}</span>
 		<div class="card">
 			<Content components={{ h1: h(1), h2: h(2), h3: h(3), h4: h(4), h5: h(5), h6: h(6) }} />
 		</div>
@@ -43,6 +39,12 @@ const { Content } = await entry.render();
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	.debug-info {
+		align-self: flex-start;
+		font-size: 0.8em;
+		padding-left: 8px;
 	}
 </style>
 
