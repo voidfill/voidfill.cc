@@ -16,13 +16,6 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-
-// import all exported components
-// currently not necessary and somewhat jank but there is no exports on entry so.
-const exports = await import(
-	/* @vite-ignore */
-	"../../content/blog/" + entry.id
-);
 ---
 
 <Layout title={entry.data.title} description={entry.data.description} nav={false}>
@@ -33,7 +26,7 @@ const exports = await import(
 			{entry.data.description && <h2>{entry.data.description}</h2>}
 		</div>
 		<div class="card">
-			<Content components={{ ...(exports?.components || {}), h1: h(1), h2: h(2), h3: h(3), h4: h(4), h5: h(5), h6: h(6) }} />
+			<Content components={{ h1: h(1), h2: h(2), h3: h(3), h4: h(4), h5: h(5), h6: h(6) }} />
 		</div>
 	</div>
 </Layout>
@@ -45,7 +38,7 @@ const exports = await import(
 		white-space: pre-wrap;
 		user-select: text;
 	}
-	
+
 	.wrapper {
 		display: flex;
 		flex-direction: column;
