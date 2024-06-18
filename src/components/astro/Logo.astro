@@ -1,39 +1,80 @@
 ---
 interface Props {
-	size?: string;
+	size?: number;
 	ref?: boolean;
+	cutout?: boolean;
 }
 
-const { size = "1.5em", ref = true } = Astro.props;
+const { size = 30, ref = true, cutout = false } = Astro.props;
+
+const id = Math.random().toString(36).substring(10);
 ---
 
-<a class="logo" href="/">
-	voidf:<span>//</span>
+<a
+	href="/"
+	class:list={{
+		logo: true,
+		ref: ref,
+		cutout: cutout,
+	}}
+	aria-label="Index Page"
+	aria-disabled={ref ? "false" : "true"}
+>
+	<svg>
+		<foreignObject mask={`url(#${id})`}>
+			<div class="center" style="background-color: var(--accent-primary);"></div>
+		</foreignObject>
+		<mask id={id} x="0" y="0">
+			<rect x="0" y="0" fill="white"></rect>
+			<text x={size * 0.118 + "px"} y={size * 0.775 + "px"}>
+				{" "}
+				voidf:
+			</text>
+			<text x={size * 2.0775 + "px"} y={size * 0.775 + "px"} class="slashes"> // </text>
+		</mask>
+	</svg>
 </a>
 
-<style define:vars={{ s: size }}>
+<style define:vars={{ s: size + "px" }}>
 	.logo {
-		all: unset;
-		background-color: var(--accent-primary);
-		color: var(--background-primary);
-		font-size: var(--s);
-		font-family: "Zilla Slab", serif;
-		font-weight: 600;
-		font-style: normal;
-		cursor: pointer;
-		text-decoration: none;
-		padding: 0 calc(var(--s) / 9);
-		user-select: none;
-		white-space: normal;
+		display: block;
+		font-size: calc(var(--s) * 0.8);
+		line-height: calc(var(--s) * 0.8);
 	}
 
-	.logo > span {
+	.logo:not(.ref) {
+		pointer-events: none;
+	}
+
+	.logo:not(.cutout) {
+		background-color: var(--background-primary);
+	}
+
+	.logo,
+	svg,
+	foreignObject,
+	mask,
+	rect,
+	.center {
+		width: calc(var(--s) * 2.7);
+		height: var(--s);
+	}
+
+	.center {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		white-space: nowrap;
+	}
+
+	.real-text,
+	text {
+		font-family: "Zilla Slab", serif;
+		font-weight: 600;
+	}
+
+	.slashes {
 		font-weight: 800;
 	}
 </style>
-
-{!ref && <style>
-	.logo {
-		pointer-events: none;
-		}
-</style>}
