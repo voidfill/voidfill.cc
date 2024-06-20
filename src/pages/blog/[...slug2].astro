@@ -1,20 +1,26 @@
 ---
 import { getCollection } from "astro:content";
 import Blogpost from "../../components/astro/Blogpost.astro";
+import { mapped } from "../../components/solid/headerlink";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
-	return posts.filter(e => !e.data.ssr).map((e) => ({
-		params: {
-			slug2: e.slug,
-		},
-		props: { entry: e },
-	}));
+	return posts
+		.filter((e) => !e.data.ssr)
+		.map((e) => ({
+			params: {
+				slug2: e.slug,
+			},
+			props: { entry: e },
+		}));
 }
 
 const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
-<Blogpost entry={entry} />
+<Blogpost data={entry.data}>
+	<Content components={{...mapped}} />
+</Blogpost>

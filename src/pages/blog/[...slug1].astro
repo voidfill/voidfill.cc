@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import Blogpost from "../../components/astro/Blogpost.astro";
+import { mapped } from "../../components/solid/headerlink";
 
 export const prerender = false;
 
@@ -14,6 +15,14 @@ const entry = await getEntry("blog", s);
 if (!entry) {
 	return new Response("Not Found", { status: 404 });
 }
+
+const { Content } = await entry.render();
 ---
 
-{entry && <Blogpost entry={entry} />}
+{
+	entry && (
+		<Blogpost data={entry.data}>
+			<Content components={{...mapped}} />
+		</Blogpost>
+	)
+}

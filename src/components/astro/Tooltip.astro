@@ -1,17 +1,29 @@
 ---
 import "../css/tooltip.css";
 
-interface Props {
-	text: string;
-}
-
-const { text } = Astro.props;
+type Props =
+	| {
+			text: string;
+			def: undefined;
+	  }
+	| {
+			text: undefined;
+			def: string;
+	  };
 ---
 
-<tool-tip text={text}>
-	<slot />
-</tool-tip>
+{ // do not format this
+	Astro.props.def
+		? (<tool-tip text={Astro.props.def}><span class="definition"><slot /></span></tool-tip>)
+		: (<tool-tip text={Astro.props.text}><slot /></tool-tip>)
+}
 
 <script>
 	import "../web/tooltip";
 </script>
+
+<style>
+	.definition {
+		border-bottom: 1px dotted rgb(from var(--accent-primary) r g b / 80%);
+	}
+</style>

@@ -25,3 +25,12 @@ export function h(level: number) {
 		</HeaderLink>
 	);
 }
+
+export const mapped = {
+	h1: h(1),
+	h2: h(2),
+	h3: h(3),
+	h4: h(4),
+	h5: h(5),
+	h6: h(6),
+};
