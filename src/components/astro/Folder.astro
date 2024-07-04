@@ -1,0 +1,101 @@
+---
+import { VsFolder, VsFolderOpened } from "solid-icons/vs";
+
+interface Props {
+	name: string;
+	open?: boolean;
+}
+
+const { name, open = false } = Astro.props;
+---
+
+<astro-folder data-open={open ? "true" : "false"}>
+	<div class="header">
+		<div class="icon">
+			<div class="folder-icons">
+				<VsFolder size="16" class="close" />
+				<VsFolderOpened size={16} class="open" style={{ display: "none" }} />
+			</div>
+			<slot name="icon" />
+		</div>
+		<span>{name}</span>
+	</div>
+	<div class="contents">
+		<slot />
+	</div>
+</astro-folder>
+
+<script>
+	class AstroFolder extends HTMLElement {
+		static observedAttributes = ["data-open"];
+		toggle: () => void;
+
+		constructor() {
+			super();
+			this.toggle = () => {
+				this.dataset.open = this.dataset.open === "true" ? "false" : "true";
+			};
+		}
+
+		connectedCallback() {
+			this.children[0].addEventListener("click", this.toggle);
+		}
+
+		disconnectedCallback() {
+			this.children[0].removeEventListener("click", this.toggle);
+		}
+	}
+
+	customElements.define("astro-folder", AstroFolder);
+</script>
+
+<style>
+	.icon {
+		display: contents;
+	}
+
+	.header {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		gap: 2px;
+	}
+
+	astro-folder {
+		display: flex;
+		flex-direction: column;
+	}
+
+	astro-folder .contents {
+		display: none;
+	}
+
+	astro-folder[data-open="true"] > .contents {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.contents {
+		margin-left: 10px;
+		border-left: 1px solid var(--accent-primary);
+		padding-left: 10px;
+	}
+
+	.icon .folder-icons:nth-last-child(n + 2) {
+		display: none;
+	}
+
+	astro-folder:not([data-open="true"]) .close {
+		display: block;
+	}
+	astro-folder:not([data-open="true"]) .open {
+		display: none;
+	}
+
+	astro-folder[data-open="true"] .close {
+		display: none;
+	}
+	astro-folder[data-open="true"] .open {
+		display: block !important;
+	}
+</style>

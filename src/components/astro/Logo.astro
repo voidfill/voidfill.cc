@@ -5,9 +5,7 @@ interface Props {
 	cutout?: boolean;
 }
 
-const { size = 30, ref = true, cutout = false } = Astro.props;
-
-const id = Math.random().toString(36).substring(10);
+const { size = 30, ref = true } = Astro.props;
 ---
 
 <a
@@ -15,24 +13,13 @@ const id = Math.random().toString(36).substring(10);
 	class:list={{
 		logo: true,
 		ref: ref,
-		cutout: cutout,
 	}}
 	aria-label="Index Page"
 	aria-disabled={ref ? "false" : "true"}
 >
-	<svg>
-		<foreignObject mask={`url(#${id})`}>
-			<div class="center" style="background-color: var(--accent-primary);"></div>
-		</foreignObject>
-		<mask id={id} x="0" y="0">
-			<rect x="0" y="0" fill="white"></rect>
-			<text x={size * 0.118 + "px"} y={size * 0.775 + "px"}>
-				{" "}
-				voidf:
-			</text>
-			<text x={size * 2.0775 + "px"} y={size * 0.775 + "px"} class="slashes"> // </text>
-		</mask>
-	</svg>
+	<span>
+		<span>voidf:</span><span class="slashes">//</span>
+	</span>
 </a>
 
 <style define:vars={{ s: size + "px" }}>
@@ -40,38 +27,19 @@ const id = Math.random().toString(36).substring(10);
 		display: block;
 		font-size: calc(var(--s) * 0.8);
 		line-height: calc(var(--s) * 0.8);
+		width: calc(var(--s) * 2.7);
+		height: var(--s);
+		background-color: var(--accent-primary);
+		font-family: "Zilla Slab", serif;
+		font-weight: 600;
+		color: var(--background-primary);
+		text-decoration: none;
+		text-align: center;
+		align-content: center;
 	}
 
 	.logo:not(.ref) {
 		pointer-events: none;
-	}
-
-	.logo:not(.cutout) {
-		background-color: var(--background-primary);
-	}
-
-	.logo,
-	svg,
-	foreignObject,
-	mask,
-	rect,
-	.center {
-		width: calc(var(--s) * 2.7);
-		height: var(--s);
-	}
-
-	.center {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		white-space: nowrap;
-	}
-
-	.real-text,
-	text {
-		font-family: "Zilla Slab", serif;
-		font-weight: 600;
 	}
 
 	.slashes {
